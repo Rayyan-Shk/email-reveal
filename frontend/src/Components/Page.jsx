@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { ChevronLeftIcon, ChevronRightIcon } from '@heroicons/react/24/outline';
-import axios from 'axios';
 import axiosInstance from '../config/axios';
 
 const initialLeads = [
