@@ -1,22 +1,11 @@
 import React, { useState } from 'react';
 import { ChevronLeftIcon, ChevronRightIcon } from '@heroicons/react/24/outline';
 import axiosInstance from '../config/axios';
+import Leads from './Leads';
 
-const initialLeads = [
-  {
-    id: 1,
-    firstName: 'John',
-    lastName: 'Doe',
-    companyName: 'Tech Innovations Inc.',
-    linkedinProfile: 'https://linkedin.com/in/johndoe',
-    jobTitle: 'Sales Manager',
-    emailAddress: 'john.doe@techinnovations.com',
-    phoneNumber: '+1 (555) 123-4567',
-  },
-];
 
 const LeadsListPage = () => {
-  const [leads, setLeads] = useState(initialLeads);
+  const [leads, setLeads] = useState(Leads);
   const [currentPage, setCurrentPage] = useState(1);
   const [revealedEmails, setRevealedEmails] = useState(new Set());
   const leadsPerPage = 5;
