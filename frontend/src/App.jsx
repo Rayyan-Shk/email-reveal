@@ -12,6 +12,7 @@ import PrivateRoute from "./Components/PrivateRoute";
 import { AuthProvider } from "./context/AuthContext";
 import LeadsListPage from "./Components/page";
 
+
 function App() {
   return (
     <GoogleOAuthProvider clientId={import.meta.env.VITE_GOOGLE_CLIENT_ID}>
