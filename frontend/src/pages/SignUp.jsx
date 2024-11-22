@@ -1,56 +1,56 @@
-import React, { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
-import { GoogleLogin } from '@react-oauth/google';
-import axiosInstance from '../config/axios';
-import { useAuth } from '../context/authContext';
+import React, { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { GoogleLogin } from "@react-oauth/google";
+import axiosInstance from "../config/axios";
+import { useAuth } from "../context/AuthContext";
 
 const SignUp = () => {
   const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    password: ''
+    name: "",
+    email: "",
+    password: "",
   });
-  const [error, setError] = useState('');
+  const [error, setError] = useState("");
   const navigate = useNavigate();
   const { login } = useAuth();
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setFormData(prevState => ({
+    setFormData((prevState) => ({
       ...prevState,
-      [name]: value
+      [name]: value,
     }));
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setError('');
+    setError("");
 
     try {
-      const response = await axiosInstance.post('api/auth/signup', formData);
+      const response = await axiosInstance.post("api/auth/signup", formData);
       login(response.data.user, response.data.token);
-      navigate('/page');
+      navigate("/page");
     } catch (err) {
-      setError(err.response?.data?.error || 'Signup failed');
+      setError(err.response?.data?.error || "Signup failed");
     }
   };
 
   // Updated Google success handler to match backend expectations
   const handleGoogleSuccess = async (credentialResponse) => {
     try {
-      const response = await axiosInstance.post('api/auth/google-auth', { 
-        credential: credentialResponse.credential  // Changed from code to credential
+      const response = await axiosInstance.post("api/auth/google-auth", {
+        credential: credentialResponse.credential, // Changed from code to credential
       });
-      
+
       if (response.data.success) {
         login(response.data.user, response.data.token);
-        navigate('/page');
+        navigate("/page");
       } else {
-        setError('Authentication failed');
+        setError("Authentication failed");
       }
     } catch (err) {
-      console.error('Google auth error:', err);
-      setError(err.response?.data?.error || 'Google authentication failed');
+      console.error("Google auth error:", err);
+      setError(err.response?.data?.error || "Google authentication failed");
     }
   };
 
@@ -62,14 +62,21 @@ const SignUp = () => {
             Create your account
           </h2>
           <p className="mt-2 text-center text-sm text-gray-600">
-            Or <Link to="/login" className="font-medium text-indigo-600 hover:text-indigo-500">
+            Or{" "}
+            <Link
+              to="/login"
+              className="font-medium text-indigo-600 hover:text-indigo-500"
+            >
               login to existing account
             </Link>
           </p>
         </div>
-        
+
         {error && (
-          <div className="bg-red-50 border border-red-400 text-red-700 px-4 py-3 rounded relative" role="alert">
+          <div
+            className="bg-red-50 border border-red-400 text-red-700 px-4 py-3 rounded relative"
+            role="alert"
+          >
             {error}
           </div>
         )}
@@ -77,7 +84,9 @@ const SignUp = () => {
         <form className="mt-8 space-y-6" onSubmit={handleSubmit}>
           <div className="rounded-md shadow-sm -space-y-px">
             <div>
-              <label htmlFor="name" className="sr-only">Name</label>
+              <label htmlFor="name" className="sr-only">
+                Name
+              </label>
               <input
                 id="name"
                 name="name"
@@ -90,7 +99,9 @@ const SignUp = () => {
               />
             </div>
             <div>
-              <label htmlFor="email" className="sr-only">Email address</label>
+              <label htmlFor="email" className="sr-only">
+                Email address
+              </label>
               <input
                 id="email"
                 name="email"
@@ -104,7 +115,9 @@ const SignUp = () => {
               />
             </div>
             <div>
-              <label htmlFor="password" className="sr-only">Password</label>
+              <label htmlFor="password" className="sr-only">
+                Password
+              </label>
               <input
                 id="password"
                 name="password"
@@ -135,14 +148,16 @@ const SignUp = () => {
               <div className="w-full border-t border-gray-300" />
             </div>
             <div className="relative flex justify-center text-sm">
-              <span className="px-2 bg-gray-50 text-gray-500">Or continue with</span>
+              <span className="px-2 bg-gray-50 text-gray-500">
+                Or continue with
+              </span>
             </div>
           </div>
 
           <div className="mt-6 flex justify-center">
             <GoogleLogin
               onSuccess={handleGoogleSuccess}
-              onError={() => setError('Google sign in failed')}
+              onError={() => setError("Google sign in failed")}
               useOneTap
             />
           </div>
