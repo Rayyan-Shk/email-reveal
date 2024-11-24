@@ -63,12 +63,7 @@ Features
 
 - POST /api/auth/signup - User registration
 - POST /api/auth/login - User login
-- POST /api/auth/google - Google OAuth login
-
-## Leads
-
-- GET /api/leads - Get paginated leads
-- POST /api/leads/reveal - Reveal lead email (requires payment)
+- POST /api/auth/google-auth - Google OAuth login
 
 ## Payments
 
