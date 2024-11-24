@@ -28,7 +28,7 @@ const LeadsListPage = () => {
 
     const config = {
       method: 'post',
-      url: 'http://localhost:5000/api/payments/create-order',
+      url: 'https://email-reveal.onrender.com/api/payments/create-order',
       headers: {
         'Content-Type': 'application/json',
       },
